@@ -1,0 +1,85 @@
+$risa-color: #ff50c5
+
+body
+  $bg: rgba(darken($risa-color, 10%), 0.7)
+  background: linear-gradient($bg, $bg), url("img/leopard.png") 
+  color: white
+  width: 100vw
+  height: 100vh
+  margin: 0
+  padding: 0
+  border-width: 0
+  display: flex
+  justify-content: center
+  align-items: center
+  overflow: hidden
+  font-family: "M PLUS Rounded 1c"
+  font-size: 5vh
+  line-height: 100%
+
+.sniglet
+  font-family: 'Sniglet', cursive
+
+#container
+  text-align: center
+
+  h1
+    $lw: 0.3vh
+    font-size: 7vh
+    color: $risa-color
+    background-color: transparent
+    text-shadow: white $lw $lw 0, white $lw -1*$lw 0, white -1*$lw -1*$lw 0, white -1*$lw $lw 0, white 0 $lw 0, white $lw 0 0, white 0 -1*$lw 0, white -1*$lw 0 0
+    margin-bottom: 1vh
+
+  .global-counter
+    font-size: 65%
+
+  #twitter-button
+    img
+      vertical-align: bottom
+      width: 5vh
+      height: 5vh
+      padding: 0 2vh
+  
+  #note
+    font-size: 50%
+
+  #button
+    padding: 0
+    margin: 0
+    position: relative
+
+    #risa-pops
+      position: absolute
+      width: 100%
+      height: 100%
+      left: 0
+      top: 0
+      img
+        position: absolute
+        max-width: 20%
+        max-height: 20%
+        top: 30%
+        left: 40%
+
+    svg
+      filter: drop-shadow(0 15px 5px darken($risa-color, 20%))
+      max-width: 100vw
+      max-height: 50vh
+      width: auto
+      height: auto
+
+    $edge-color: #ccc
+    .face, .base
+      stroke: $edge-color
+      stroke-width: 4
+    .base
+      fill: $edge-color
+    .border
+      stroke: grey
+      stroke-width: 1
+      fill: transparent
+    .push
+      fill: #eee
+      stroke: grey
+      stroke-width: 1

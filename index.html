@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>Matoba Risa Dash Button</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="index.sass">
+    <script src="node_modules/animejs/anime.min.js"></script>
+    <script src="index.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Sniglet:800" rel="stylesheet">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="og:type" content="website">
+    <meta name="og:title" content="Matoba Risa Dash Button">
+    <meta name="og:description" content="的場梨沙ちゃんを浴びてQOLを爆上げ💪">
+    <meta name="og:image" content="https://nkudryavka.github.io/matoba-risa-dash-button/screenshot.png">
+    <link rel="icon" type="image/png" sizes="152x152" href="img/favicon.png">
+  </head>
+  <body>
+    <div id="container">
+      <h1 class="sniglet">Matoba Risa Dash Button</h1>
+      <div>
+        <div class="global-counter">
+          世界中のロリコン：<span id="global-counter" class="counter">---</span>梨沙ちゃん
+        </div>
+        <span id="local-counter" class="counter">0</span>梨沙ちゃん
+        <a id="twitter-button" target="_blank" href="https://twitter.com/intent/tweet?text=%E7%9A%84%E5%A0%B4%E6%A2%A8%E6%B2%99%E3%81%A1%E3%82%83%E3%82%93%E3%82%92%E6%B5%B4%E3%81%B3%E3%81%A6QOL%E3%82%92%E7%88%86%E4%B8%8A%E3%81%92%F0%9F%92%AA&url=https%3A%2F%2Fnkudryavka.github.io%2Fmatoba-risa-dash-button%2F&hashtags=Matoba_Risa_Dash_Button"><img src="img/twitter.svg"></a>
+      </div>
+      <div id="note">
+        梨沙ちゃん以外の声も聞こえるかも！？<br>（音が出るよ！）
+      </div>
+      <div id="button">
+          <div id="risa-pops">
+            <img src="img/risa-n.png">
+            <img src="img/risa-n-after.png">
+          </div>
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2820" height="1600" viewBox="0 0 282 160">
+          <defs>
+            <pattern id="risa-chan" patternUnits="userSpaceOnUse" width="270" height="110">
+              <image xlink:href="img/risa-chan.png" x="0" y="0" width="270" height="110" />
+            </pattern>
+          </defs>
+          <rect x="5" y="55" width="262" height="50" class="base"></rect> 
+          <rect x="5" y="55" width="262" height="100" rx="50" ry="50" class="base"></rect>
+          <rect x="4" y="5.5" width="264" height="102" rx="52" ry="52" class="border"></rect>
+          <rect x="5" y="5" width="262" height="100" rx="50" ry="50" fill="url(#risa-chan)" class="face"></rect>
+          <rect x="7" y="7" width="258" height="96" rx="48" ry="48" class="border"></rect>
+          <circle cx="215" cy="55" r="44" class="push"></circle>
+        </svg>
+      </div>
+    </div>
+  </body>
+</html>
