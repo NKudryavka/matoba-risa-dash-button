@@ -21,6 +21,8 @@ async function fetchSounds() {
         'sound/derepa-papa.mp3',
         'sound/derepa-producer.mp3',
         'sound/derepa-zampona.mp3',
+        'sound/dereradi-producer.mp3',
+        'sound/dereradi-sikkari.mp3',
     ];
     const responses = await Promise.all(sounds.map((p) => fetch(p)));
     const buffers = await Promise.all(responses.map((r) => r.arrayBuffer()));
