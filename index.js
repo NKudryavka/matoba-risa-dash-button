@@ -2,7 +2,7 @@ import anime from 'animejs';
 
 const RISA = 'Spin-off!と集貝はなさんにありがとう。';
 const TOKEN = btoa(Math.random());
-const API_URL = 'https://77pkr516jb.execute-api.ap-northeast-1.amazonaws.com/dev/risa';
+const API_URL = 'https://85xhzvhf2k.execute-api.ap-northeast-1.amazonaws.com/prod/risa';
 
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioContext = new AudioContext();
