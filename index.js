@@ -94,13 +94,19 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   let refreshCount = null;
+  let leftRefresh = 0;
   function refreshGlobalCount() {
-    if (count === refreshCount) return;
+    if (leftRefresh <= 0 && count === refreshCount) return;
     fetch(`${API_URL}?risa=${RISA}&token=${TOKEN}`)
     .then((res) => res.json())
     .then((res) => {
       globalCounter.textContent = res.count.toLocaleString();
-      refreshCount = count;
+      if (refreshCount === count) {
+        leftRefresh--;
+      } else {
+        refreshCount = count;
+        leftRefresh = 3;
+      }
     });
   }
   refreshGlobalCount();
