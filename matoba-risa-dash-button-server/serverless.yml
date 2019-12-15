@@ -1,0 +1,121 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: matoba-risa-dash-button-server
+# app and org for use with dashboard.serverless.com
+#app: your-app-name
+#org: your-org-name
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+# frameworkVersion: "=X.X.X"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+# you can overwrite defaults here
+  stage: ${opt:stage, self:custom.defaultStage}
+  region: ap-northeast-1
+
+  environment:
+    DYNAMODB_TABLE_PREFIX: ${self:service}-${opt:stage, self:provider.stage}
+    DYNAMODB_LOG_TABLE: ${self:provider.environment.DYNAMODB_TABLE_PREFIX}-log
+    DYNAMODB_SUM_TABLE: ${self:provider.environment.DYNAMODB_TABLE_PREFIX}-sum
+
+# you can add statements to the Lambda function's IAM Role here
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE_PREFIX}*"
+
+custom:
+  defaultStage: dev
+  environment:
+    dev:
+      CORS_ORIGIN: "http://localhost:1234"
+      CAPACITY_UNIT: 1
+    prod:
+      CORS_ORIGIN: "https://nkudryavka.github.io"
+      CAPACITY_UNIT: 10
+
+functions:
+  gettotal:
+    handler: handler.getTotal
+    events:
+      - http:
+          path: risa
+          method: get
+          cors:
+            origin: ${self:custom.environment.${self:provider.stage}.CORS_ORIGIN}
+  order:
+    handler: handler.order
+    events:
+      - http:
+          path: risa
+          method: post
+          cors:
+            origin: ${self:custom.environment.${self:provider.stage}.CORS_ORIGIN}
+  countup:
+    handler: counter.countUp
+    events:
+      - stream:
+          type: dynamodb
+          arn:
+            Fn::GetAtt: [MatobaRisaDashButtonDynamoDbLogTable, StreamArn]
+
+resources:
+  Resources:
+    MatobaRisaDashButtonDynamoDbLogTable:
+      Type: "AWS::DynamoDB::Table"
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+          -
+            AttributeName: datetime
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+          -
+            AttributeName: datetime
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: ${self:custom.environment.${self:provider.stage}.CAPACITY_UNIT}
+          WriteCapacityUnits: ${self:custom.environment.${self:provider.stage}.CAPACITY_UNIT}
+        TableName: ${self:provider.environment.DYNAMODB_LOG_TABLE}
+    MatobaRisaDashButtonDynamoDbSumTable:
+      Type: "AWS::DynamoDB::Table"
+      Properties:
+        AttributeDefinitions:
+          - 
+            AttributeName: name
+            AttributeType: S
+        KeySchema:
+          - 
+            AttributeName: name
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: ${self:custom.environment.${self:provider.stage}.CAPACITY_UNIT}
+          WriteCapacityUnits: ${self:custom.environment.${self:provider.stage}.CAPACITY_UNIT}
+        TableName: ${self:provider.environment.DYNAMODB_SUM_TABLE}

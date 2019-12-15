@@ -1,0 +1,14 @@
+{
+  "name": "matoba-risa-dash-button-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "uuid": "^3.3.3"
+  }
+}
