@@ -8,7 +8,7 @@
     "parcel": "mkdir dist; cp -r sound img/screenshot.png dist; parcel index.html index.js",
     "build": "parcel build --public-url ./ index.html && cp -r sound img/screenshot.png dist/",
     "deploy": "cd matoba-risa-dash-button-server && serverless deploy",
-    "deploy:prod": "cd matoba-risa-dash-button-server && serverless deploy --stage prod"
+    "deploy:prod": "cd matoba-risa-dash-button-server && npm install && serverless deploy --stage prod"
   },
   "author": "",
   "license": "UNLICENSED",
