@@ -16,6 +16,7 @@ anime.easings['gravity'] = (t) => {
 async function fetchSounds() {
   const sounds = [
     'sound/derepa-risarisa.mp3',
+    'sound/natalia-risa.mp3',
     'sound/derepa-arigato.mp3',
     'sound/derepa-lolicon.mp3',
     'sound/derepa-papa.mp3',
@@ -114,10 +115,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function say() {
     audioContext.resume();
-    const pop = (Math.random() < 0.7 ? pops[0] : pops[random(pops.length)]).cloneNode();
+    const pop = pops[random(pops.length)].cloneNode();
     countUp();
     const source = audioContext.createBufferSource();
-    source.buffer = sounds[Math.random() < 0.99 ? random(sounds.length-1)+1 : 0];
+    source.buffer = sounds[Math.random() < 0.98 ? random(sounds.length-1)+1 : (random(2))];
     source.connect(audioContext.destination);
     source.start(0);
     
