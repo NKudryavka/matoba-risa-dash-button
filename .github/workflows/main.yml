@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: 
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+    - name: Node.js
+      uses: actions/setup-node@v1.1.0
+    - name: Setup node_modules
+      run: npm install
+    - name: Deploy server
+      run: |
+        npm install -g serverless
+        npm run deploy:prod
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - name: Build pages
+      run: npm run build
+    - name: Deploy pages
+      uses: maxheld83/ghpages@v0.2.1
+      env:
+        BUILD_DIR: dist/
+        GH_PAT: ${{ secrets.GITHUB_ACCESS_TOKEN }}
