@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const pop = pops[random(pops.length)].cloneNode();
     countUp();
     const source = audioContext.createBufferSource();
-    source.buffer = sounds[Math.random() < 0.98 ? random(sounds.length-1)+1 : (random(2))];
+    source.buffer = sounds[Math.random() < 0.98 ? random(sounds.length-2)+2 : (random(2))];
     source.connect(audioContext.destination);
     source.start(0);
     
