@@ -13,10 +13,13 @@ anime.easings['gravity'] = (t) => {
   return gravityA * t * t + gravityB * t;
 }
 
+const rareSoundCount = 2;
 async function fetchSounds() {
   const sounds = [
+    // 1%レア
     'sound/derepa-risarisa.mp3',
     'sound/natalia-risa.mp3',
+    // レア以外を等分
     'sound/derepa-arigato.mp3',
     'sound/derepa-lolicon.mp3',
     'sound/derepa-papa.mp3',
@@ -24,6 +27,16 @@ async function fetchSounds() {
     'sound/derepa-zampona.mp3',
     'sound/dereradi-producer.mp3',
     'sound/dereradi-sikkari.mp3',
+    'sound/deresute-anta.mp3',
+    'sound/deresute-producer.mp3',
+    'sound/mitsumete-lolicon.mp3',
+    'sound/mitsumete-anta1.mp3',
+    'sound/mitsumete-anta2.mp3',
+    'sound/mitsumete-hentai.mp3',
+    'sound/mitsumete-loliconfantasy.mp3',
+    'sound/mitsumete-papa1.mp3',
+    'sound/mitsumete-papa2.mp3',
+    'sound/mitsumete-papa3.mp3',
   ];
   const responses = await Promise.all(sounds.map((p) => fetch(p)));
   const buffers = await Promise.all(responses.map((r) => r.arrayBuffer()));
@@ -118,7 +131,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const pop = pops[random(pops.length)].cloneNode();
     countUp();
     const source = audioContext.createBufferSource();
-    source.buffer = sounds[Math.random() < 0.98 ? random(sounds.length-2)+2 : (random(2))];
+    source.buffer = sounds[Math.random() < (1 - 0.01 * rareSoundCount) ? random(sounds.length - rareSoundCount) + rareSoundCount : (random(rareSoundCount))];
     source.connect(audioContext.destination);
     source.start(0);
     
